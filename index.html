@@ -128,10 +128,11 @@ footer .wrap { padding-block: 40px 48px; display: flex; flex-wrap: wrap; justify
 footer img { width: 64px; }
 
 /* lightbox */
-.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(5,5,5,.96); display: grid; grid-template-rows: auto 1fr auto; padding: calc(env(safe-area-inset-top,0px) + 8px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 12px) var(--gutter-l); }
+.lightbox { position: fixed; inset: 0; height: 100vh; height: 100dvh; overflow: hidden; z-index: 50; background: rgba(5,5,5,.96); display: grid; grid-template-rows: auto 1fr auto; padding: calc(env(safe-area-inset-top,0px) + 8px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 12px) var(--gutter-l); }
 .lightbox__bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.lightbox__stage { display: grid; place-items: center; min-height: 0; position: relative; }
-.lightbox__stage img { max-height: 100%; max-width: 100%; object-fit: contain; height: auto; width: auto; }
+.lightbox__stage { display: flex; align-items: center; justify-content: center; min-height: 0; overflow: hidden; position: relative; }
+.lightbox__stage img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 150px); max-height: calc(100dvh - 150px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)); object-fit: contain; }
+@media (max-width: 700px) { .lb-nav { top: auto; bottom: 0; transform: none; } }
 .lightbox__cap { text-align: center; padding-top: 10px; }
 .lightbox__cap strong { font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; display: block; }
 .lightbox__cap span { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
