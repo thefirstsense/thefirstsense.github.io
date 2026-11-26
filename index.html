@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The First Sense</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="The First Sense by Niroshanan Photography. Singapore nights, gardens, wildlife, temples and journeys. Capturing what moves you.">
+<link rel="icon" href="images/icon.png">
+<meta property="og:title" content="The First Sense by Niroshanan Photography">
+<meta property="og:image" content="images/share.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allura&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+/* Layout: a dark gallery wall. Brand is the frame, photographs are the light. Hero photo, series index, one masonry wall per series, quiet about + follow. */
+:root {
+  --ink: #0b0b0b;        /* gallery wall */
+  --umber: #17120c;      /* raised surfaces */
+  --umber-2: #2a1f14;    /* borders, hover */
+  --gold: #d4af37;       /* brand gold, used sparingly */
+  --sand: #dcc9a9;       /* secondary text */
+  --ivory: #f8f5ef;      /* primary text */
+  --muted: #a8998a;      /* captions */
+  --f-display: "Playfair Display", "Iowan Old Style", Georgia, serif;
+  --f-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --f-script: "Allura", "Snell Roundhand", cursive;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; background: var(--ink); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--ink); color: var(--ivory); font-family: var(--f-body); font-weight: 300; font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.eyebrow { margin: 0; font-size: .72rem; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 400; text-wrap: balance; margin: 0; }
+
+/* top bar */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--ink); }
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: rgba(11,11,11,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--umber-2); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 58px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand img { width: 54px; }
+.brand span { font-family: var(--f-display); font-size: 1.05rem; letter-spacing: .02em; }
+.nav { display: flex; gap: 22px; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; }
+.nav a { text-decoration: none; color: var(--sand); }
+.nav a:hover { color: var(--gold); }
+@media (max-width: 560px) { .nav { gap: 14px; font-size: .66rem; letter-spacing: .14em; } .brand span { display: none; } }
+
+/* hero */
+.hero { position: relative; min-height: clamp(460px, 78vh, 820px); display: grid; place-items: center; overflow: hidden; isolation: isolate; }
+.hero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at center, rgba(11,11,11,.55) 0%, rgba(11,11,11,.35) 45%, rgba(11,11,11,.9) 100%), linear-gradient(to bottom, rgba(11,11,11,0) 60%, var(--ink) 100%); }
+.hero__inner { text-align: center; padding: 48px var(--gutter-r) 64px var(--gutter-l); display: grid; justify-items: center; gap: 6px; }
+.hero__logo { width: min(560px, 86vw); filter: drop-shadow(0 4px 24px rgba(0,0,0,.6)); }
+.hero h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.tagline { font-family: var(--f-script); font-size: clamp(2rem, 5vw, 3.1rem); color: var(--ivory); line-height: 1.1; margin: 4px 0 0; text-shadow: 0 2px 18px rgba(0,0,0,.7); }
+.hero__cta { margin-top: 22px; display: inline-flex; align-items: center; gap: 10px; padding: 12px 26px; border: 1px solid var(--gold); color: var(--ivory); text-decoration: none; font-size: .74rem; letter-spacing: .24em; text-transform: uppercase; background: rgba(11,11,11,.35); transition: background .25s, color .25s; }
+.hero__cta:hover { background: var(--gold); color: var(--ink); }
+
+/* intro + series index */
+.intro { padding-block: 72px 40px; display: grid; gap: 40px; }
+.intro__lead { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.3fr); gap: 40px; align-items: end; }
+.intro__lead h2 { font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.15; }
+.intro__lead h2 em { color: var(--gold); }
+.intro__lead p { margin: 0; color: var(--sand); max-width: 58ch; }
+@media (max-width: 820px) { .intro__lead { grid-template-columns: 1fr; gap: 16px; } }
+.series-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 14px; }
+.series-card { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; text-decoration: none; background: var(--umber); }
+.series-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, opacity .3s; opacity: .85; }
+.series-card:hover img { transform: scale(1.04); opacity: 1; }
+.series-card__text { position: absolute; inset: auto 0 0 0; padding: 40px 18px 16px; display: flex; justify-content: space-between; align-items: baseline; gap: 12px; background: linear-gradient(to top, rgba(11,11,11,.92), rgba(11,11,11,0)); }
+.series-card__name { font-family: var(--f-display); font-size: 1.3rem; }
+.series-card__count { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+/* last card spans when it would sit alone */
+@media (min-width: 900px) { .series-index { grid-template-columns: repeat(5, 1fr); } .series-card:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; } .series-card:first-child img { position: absolute; inset: 0; } }
+
+/* sticky series chips */
+.chips { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 59px); z-index: 15; background: rgba(11,11,11,.92); border-block: 1px solid var(--umber-2); }
+.chips .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.chips .wrap::-webkit-scrollbar { display: none; }
+.chips a { flex: none; text-decoration: none; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sand); padding: 7px 14px; border: 1px solid var(--umber-2); border-radius: 999px; }
+.chips a:hover, .chips a.is-active { color: var(--ink); background: var(--gold); border-color: var(--gold); }
+
+/* series walls */
+.series { padding-block: 72px 8px; scroll-margin-top: 130px; }
+.series__head { display: grid; gap: 10px; margin-bottom: 28px; max-width: 720px; }
+.series__head h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.1; }
+.series__blurb { margin: 0; color: var(--sand); }
+.gallery { columns: 4 260px; column-gap: 14px; }
+.frame { break-inside: avoid; margin: 0 0 14px; }
+.frame__open { display: block; width: 100%; padding: 0; border: 0; background: var(--umber); cursor: zoom-in; overflow: hidden; }
+.frame__open img { width: 100%; transition: transform .6s ease; }
+.frame__open:hover img { transform: scale(1.025); }
+.frame figcaption { display: flex; justify-content: space-between; gap: 12px; padding: 8px 2px 0; font-size: .8rem; color: var(--muted); }
+.frame__no { font-size: .66rem; letter-spacing: .18em; color: var(--gold); opacity: .8; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* songs */
+.band { margin-top: 88px; background: var(--umber); border-block: 1px solid var(--umber-2); }
+.band .wrap { padding-block: 72px; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 48px; align-items: center; }
+@media (max-width: 820px) { .band .wrap { grid-template-columns: 1fr; gap: 24px; } }
+.band h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.1; margin-top: 10px; }
+.band h2 .script { font-family: var(--f-script); color: var(--gold); font-size: 1.25em; }
+.band p { color: var(--sand); margin: 16px 0 0; max-width: 52ch; }
+.links { display: grid; gap: 12px; }
+.link-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; border: 1px solid var(--umber-2); text-decoration: none; background: var(--ink); transition: border-color .25s; }
+.link-row:hover { border-color: var(--gold); }
+.link-row strong { font-family: var(--f-display); font-weight: 400; font-size: 1.25rem; display: block; }
+.link-row small { color: var(--muted); font-size: .8rem; }
+.link-row .arrow { color: var(--gold); font-size: 1.2rem; }
+
+/* about */
+.about { padding-block: 88px; display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 56px; align-items: center; }
+@media (max-width: 820px) { .about { grid-template-columns: 1fr; gap: 28px; } }
+.about__img { aspect-ratio: 4/5; object-fit: cover; width: 100%; }
+.about h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); line-height: 1.1; margin: 10px 0 18px; }
+.about p { color: var(--sand); margin: 0 0 14px; max-width: 60ch; }
+.about blockquote { margin: 26px 0 0; font-family: var(--f-display); font-style: italic; font-size: 1.35rem; color: var(--ivory); border-left: 1px solid var(--gold); padding-left: 18px; max-width: 40ch; }
+
+footer { border-top: 1px solid var(--umber-2); }
+footer .wrap { padding-block: 40px 48px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; font-size: .78rem; color: var(--muted); }
+footer img { width: 64px; }
+
+/* lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(5,5,5,.96); display: grid; grid-template-rows: auto 1fr auto; padding: calc(env(safe-area-inset-top,0px) + 8px) var(--gutter-r) calc(env(safe-area-inset-bottom,0px) + 12px) var(--gutter-l); }
+.lightbox__bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.lightbox__stage { display: grid; place-items: center; min-height: 0; position: relative; }
+.lightbox__stage img { max-height: 100%; max-width: 100%; object-fit: contain; height: auto; width: auto; }
+.lightbox__cap { text-align: center; padding-top: 10px; }
+.lightbox__cap strong { font-family: var(--f-display); font-weight: 400; font-size: 1.15rem; display: block; }
+.lightbox__cap span { font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.lb-btn { background: none; border: 1px solid var(--umber-2); color: var(--ivory); width: 44px; height: 44px; font-size: 1.2rem; cursor: pointer; display: grid; place-items: center; }
+.lb-btn:hover { border-color: var(--gold); color: var(--gold); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(11,11,11,.6); }
+.lb-prev { left: 0; } .lb-next { right: 0; }
+.lb-count { font-size: .72rem; letter-spacing: .2em; color: var(--muted); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="images/eye.png" alt="" width="240" height="79"><span>The First Sense</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work">Work</a><a href="#songs">Songs</a><a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <img class="hero__img" src="images/hero.jpg" alt="Supertrees glowing in front of Marina Bay Sands at night">
+    <div class="hero__inner">
+      <h1>The First Sense by Niroshanan Photography</h1>
+      <img class="hero__logo" src="images/logo.png" alt="The First Sense by Niroshanan Photography" width="900" height="473">
+      <p class="tagline">Capturing what moves you</p>
+      <a class="hero__cta" href="#work">View the work</a>
+    </div>
+  </section>
+
+  <div class="wrap intro" id="work">
+    <div class="intro__lead">
+      <div>
+        <p class="eyebrow">Portfolio · 55 photographs</p>
+        <h2>Seven series, one way of <em>seeing</em>.</h2>
+      </div>
+      <p>Singapore after dark, gardens in full colour, wildlife up close, temples and traditions, and the places further away. Pick a series, then tap any photograph to see it large.</p>
+    </div>
+    <div class="series-index">
+<a class="series-card" href="#singapore-nights">
+  <img src="images/singapore-nights/b1-09-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Singapore Nights</span><span class="series-card__count">3 frames</span></span>
+</a>
+<a class="series-card" href="#garden-light">
+  <img src="images/garden-light/088-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Garden Light</span><span class="series-card__count">13 frames</span></span>
+</a>
+<a class="series-card" href="#quiet-places">
+  <img src="images/quiet-places/b1-03-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Quiet Places</span><span class="series-card__count">3 frames</span></span>
+</a>
+<a class="series-card" href="#wild-singapore">
+  <img src="images/wild-singapore/b1-02-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Wild Singapore</span><span class="series-card__count">3 frames</span></span>
+</a>
+<a class="series-card" href="#deep-blue">
+  <img src="images/deep-blue/252-sm.jpg" alt="" loading="lazy" width="1080" height="1080">
+  <span class="series-card__text"><span class="series-card__name">Deep Blue</span><span class="series-card__count">4 frames</span></span>
+</a>
+<a class="series-card" href="#temples-traditions">
+  <img src="images/temples-traditions/004-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Temples &amp; Traditions</span><span class="series-card__count">12 frames</span></span>
+</a>
+<a class="series-card" href="#journeys">
+  <img src="images/journeys/055-sm.jpg" alt="" loading="lazy" width="1080" height="1350">
+  <span class="series-card__text"><span class="series-card__name">Journeys</span><span class="series-card__count">17 frames</span></span>
+</a>
+    </div>
+  </div>
+
+  <nav class="chips" aria-label="Series">
+    <div class="wrap"><a href="#singapore-nights">Singapore Nights</a><a href="#garden-light">Garden Light</a><a href="#quiet-places">Quiet Places</a><a href="#wild-singapore">Wild Singapore</a><a href="#deep-blue">Deep Blue</a><a href="#temples-traditions">Temples &amp; Traditions</a><a href="#journeys">Journeys</a></div>
+  </nav>
+
+  <div class="wrap">
+<section class="series" id="singapore-nights" aria-labelledby="singapore-nights-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 1 of 7</p>
+    <h2 id="singapore-nights-h">Singapore Nights</h2>
+    <p class="series__blurb">When the sun goes down, the city starts to glow. Gardens by the Bay and Marina Bay after dark.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/singapore-nights/b1-09.jpg" data-title="Supertrees and Marina Bay Sands" data-series="Singapore Nights" aria-label="Open Supertrees and Marina Bay Sands"><img src="images/singapore-nights/b1-09-sm.jpg" alt="Supertrees and Marina Bay Sands" loading="lazy" width="1080" height="1350"></button><figcaption><span>Supertrees and Marina Bay Sands</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/singapore-nights/b1-01.jpg" data-title="Supertree Grove at night" data-series="Singapore Nights" aria-label="Open Supertree Grove at night"><img src="images/singapore-nights/b1-01-sm.jpg" alt="Supertree Grove at night" loading="lazy" width="1080" height="1350"></button><figcaption><span>Supertree Grove at night</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/singapore-nights/b1-07.jpg" data-title="The Shoppes from above" data-series="Singapore Nights" aria-label="Open The Shoppes from above"><img src="images/singapore-nights/b1-07-sm.jpg" alt="The Shoppes from above" loading="lazy" width="1080" height="1350"></button><figcaption><span>The Shoppes from above</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="garden-light" aria-labelledby="garden-light-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 2 of 7</p>
+    <h2 id="garden-light-h">Garden Light</h2>
+    <p class="series__blurb">Petals, colour and soft light. Orchids, dahlias and blooms from Singapore&#x27;s gardens and beyond.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/088.jpg" data-title="Orange dahlia" data-series="Garden Light" aria-label="Open Orange dahlia"><img src="images/garden-light/088-sm.jpg" alt="Orange dahlia" loading="lazy" width="1080" height="1350"></button><figcaption><span>Orange dahlia</span><span class="frame__no">No. 088</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/bg079.jpg" data-title="Red orchids" data-series="Garden Light" aria-label="Open Red orchids"><img src="images/garden-light/bg079-sm.jpg" alt="Red orchids" loading="lazy" width="1080" height="1350"></button><figcaption><span>Red orchids</span><span class="frame__no">No. BG079</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/127.jpg" data-title="Dancing-lady orchids" data-series="Garden Light" aria-label="Open Dancing-lady orchids"><img src="images/garden-light/127-sm.jpg" alt="Dancing-lady orchids" loading="lazy" width="1080" height="1350"></button><figcaption><span>Dancing-lady orchids</span><span class="frame__no">No. 127</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/x119.jpg" data-title="Purple orchid" data-series="Garden Light" aria-label="Open Purple orchid"><img src="images/garden-light/x119-sm.jpg" alt="Purple orchid" loading="lazy" width="1080" height="1350"></button><figcaption><span>Purple orchid</span><span class="frame__no">No. X119</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/bg089.jpg" data-title="Pink orchids" data-series="Garden Light" aria-label="Open Pink orchids"><img src="images/garden-light/bg089-sm.jpg" alt="Pink orchids" loading="lazy" width="1080" height="1350"></button><figcaption><span>Pink orchids</span><span class="frame__no">No. BG089</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/128.jpg" data-title="Spotted vanda" data-series="Garden Light" aria-label="Open Spotted vanda"><img src="images/garden-light/128-sm.jpg" alt="Spotted vanda" loading="lazy" width="1080" height="1350"></button><figcaption><span>Spotted vanda</span><span class="frame__no">No. 128</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/x199.jpg" data-title="Agapanthus" data-series="Garden Light" aria-label="Open Agapanthus"><img src="images/garden-light/x199-sm.jpg" alt="Agapanthus" loading="lazy" width="1080" height="1350"></button><figcaption><span>Agapanthus</span><span class="frame__no">No. X199</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/bg093.jpg" data-title="Blue vanda" data-series="Garden Light" aria-label="Open Blue vanda"><img src="images/garden-light/bg093-sm.jpg" alt="Blue vanda" loading="lazy" width="1080" height="1350"></button><figcaption><span>Blue vanda</span><span class="frame__no">No. BG093</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/137.jpg" data-title="Golden orchid spray" data-series="Garden Light" aria-label="Open Golden orchid spray"><img src="images/garden-light/137-sm.jpg" alt="Golden orchid spray" loading="lazy" width="1080" height="1350"></button><figcaption><span>Golden orchid spray</span><span class="frame__no">No. 137</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/x151.jpg" data-title="Heliconia" data-series="Garden Light" aria-label="Open Heliconia"><img src="images/garden-light/x151-sm.jpg" alt="Heliconia" loading="lazy" width="1080" height="1350"></button><figcaption><span>Heliconia</span><span class="frame__no">No. X151</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/bg069.jpg" data-title="Purple orchids" data-series="Garden Light" aria-label="Open Purple orchids"><img src="images/garden-light/bg069-sm.jpg" alt="Purple orchids" loading="lazy" width="1080" height="1350"></button><figcaption><span>Purple orchids</span><span class="frame__no">No. BG069</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/x255.jpg" data-title="Alstroemeria" data-series="Garden Light" aria-label="Open Alstroemeria"><img src="images/garden-light/x255-sm.jpg" alt="Alstroemeria" loading="lazy" width="1080" height="1350"></button><figcaption><span>Alstroemeria</span><span class="frame__no">No. X255</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/garden-light/x120.jpg" data-title="Spotted orchids" data-series="Garden Light" aria-label="Open Spotted orchids"><img src="images/garden-light/x120-sm.jpg" alt="Spotted orchids" loading="lazy" width="1080" height="1350"></button><figcaption><span>Spotted orchids</span><span class="frame__no">No. X120</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="quiet-places" aria-labelledby="quiet-places-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 3 of 7</p>
+    <h2 id="quiet-places-h">Quiet Places</h2>
+    <p class="series__blurb">Pagodas, bridges and still water. The calm corners worth slowing down for.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/quiet-places/b1-03.jpg" data-title="Chinese Garden at dusk" data-series="Quiet Places" aria-label="Open Chinese Garden at dusk"><img src="images/quiet-places/b1-03-sm.jpg" alt="Chinese Garden at dusk" loading="lazy" width="1080" height="1350"></button><figcaption><span>Chinese Garden at dusk</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/quiet-places/b1-05.jpg" data-title="The pagoda" data-series="Quiet Places" aria-label="Open The pagoda"><img src="images/quiet-places/b1-05-sm.jpg" alt="The pagoda" loading="lazy" width="1080" height="1350"></button><figcaption><span>The pagoda</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/quiet-places/b1-08.jpg" data-title="Garden sunset" data-series="Quiet Places" aria-label="Open Garden sunset"><img src="images/quiet-places/b1-08-sm.jpg" alt="Garden sunset" loading="lazy" width="1080" height="1350"></button><figcaption><span>Garden sunset</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="wild-singapore" aria-labelledby="wild-singapore-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 4 of 7</p>
+    <h2 id="wild-singapore-h">Wild Singapore</h2>
+    <p class="series__blurb">The wildlife that shares the city, and the moments it lets you see.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/wild-singapore/b1-02.jpg" data-title="Macaque portrait" data-series="Wild Singapore" aria-label="Open Macaque portrait"><img src="images/wild-singapore/b1-02-sm.jpg" alt="Macaque portrait" loading="lazy" width="1080" height="1350"></button><figcaption><span>Macaque portrait</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/wild-singapore/b1-06.jpg" data-title="Three birds" data-series="Wild Singapore" aria-label="Open Three birds"><img src="images/wild-singapore/b1-06-sm.jpg" alt="Three birds" loading="lazy" width="1080" height="1350"></button><figcaption><span>Three birds</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/wild-singapore/b1-04.jpg" data-title="Twisted vine" data-series="Wild Singapore" aria-label="Open Twisted vine"><img src="images/wild-singapore/b1-04-sm.jpg" alt="Twisted vine" loading="lazy" width="1080" height="1350"></button><figcaption><span>Twisted vine</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="deep-blue" aria-labelledby="deep-blue-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 5 of 7</p>
+    <h2 id="deep-blue-h">Deep Blue</h2>
+    <p class="series__blurb">A window into the ocean. Colour and patience behind the aquarium glass.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/deep-blue/252.jpg" data-title="Lionfish" data-series="Deep Blue" aria-label="Open Lionfish"><img src="images/deep-blue/252-sm.jpg" alt="Lionfish" loading="lazy" width="1080" height="1080"></button><figcaption><span>Lionfish</span><span class="frame__no">No. 252</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/deep-blue/281.jpg" data-title="Sea turtle" data-series="Deep Blue" aria-label="Open Sea turtle"><img src="images/deep-blue/281-sm.jpg" alt="Sea turtle" loading="lazy" width="1080" height="1080"></button><figcaption><span>Sea turtle</span><span class="frame__no">No. 281</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/deep-blue/262.jpg" data-title="Striped rabbitfish" data-series="Deep Blue" aria-label="Open Striped rabbitfish"><img src="images/deep-blue/262-sm.jpg" alt="Striped rabbitfish" loading="lazy" width="1080" height="1080"></button><figcaption><span>Striped rabbitfish</span><span class="frame__no">No. 262</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/deep-blue/256.jpg" data-title="Nurse shark" data-series="Deep Blue" aria-label="Open Nurse shark"><img src="images/deep-blue/256-sm.jpg" alt="Nurse shark" loading="lazy" width="1080" height="1080"></button><figcaption><span>Nurse shark</span><span class="frame__no">No. 256</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="temples-traditions" aria-labelledby="temples-traditions-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 6 of 7</p>
+    <h2 id="temples-traditions-h">Temples &amp; Traditions</h2>
+    <p class="series__blurb">Gold, colour and devotion. Temples and the traditions they hold.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/004.jpg" data-title="Sri Mariamman gopuram" data-series="Temples &amp; Traditions" aria-label="Open Sri Mariamman gopuram"><img src="images/temples-traditions/004-sm.jpg" alt="Sri Mariamman gopuram" loading="lazy" width="1080" height="1350"></button><figcaption><span>Sri Mariamman gopuram</span><span class="frame__no">No. 004</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/w110.jpg" data-title="Thai temple" data-series="Temples &amp; Traditions" aria-label="Open Thai temple"><img src="images/temples-traditions/w110-sm.jpg" alt="Thai temple" loading="lazy" width="1080" height="1350"></button><figcaption><span>Thai temple</span><span class="frame__no">No. W110</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/x215.jpg" data-title="Blue and gold" data-series="Temples &amp; Traditions" aria-label="Open Blue and gold"><img src="images/temples-traditions/x215-sm.jpg" alt="Blue and gold" loading="lazy" width="1080" height="1350"></button><figcaption><span>Blue and gold</span><span class="frame__no">No. X215</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/023.jpg" data-title="Temple guardian" data-series="Temples &amp; Traditions" aria-label="Open Temple guardian"><img src="images/temples-traditions/023-sm.jpg" alt="Temple guardian" loading="lazy" width="1080" height="1350"></button><figcaption><span>Temple guardian</span><span class="frame__no">No. 023</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/w109.jpg" data-title="Golden pagoda" data-series="Temples &amp; Traditions" aria-label="Open Golden pagoda"><img src="images/temples-traditions/w109-sm.jpg" alt="Golden pagoda" loading="lazy" width="1080" height="1350"></button><figcaption><span>Golden pagoda</span><span class="frame__no">No. W109</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/163.jpg" data-title="Oil lamps" data-series="Temples &amp; Traditions" aria-label="Open Oil lamps"><img src="images/temples-traditions/163-sm.jpg" alt="Oil lamps" loading="lazy" width="1080" height="1350"></button><figcaption><span>Oil lamps</span><span class="frame__no">No. 163</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/x227.jpg" data-title="Gopuram" data-series="Temples &amp; Traditions" aria-label="Open Gopuram"><img src="images/temples-traditions/x227-sm.jpg" alt="Gopuram" loading="lazy" width="1080" height="1350"></button><figcaption><span>Gopuram</span><span class="frame__no">No. X227</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/025.jpg" data-title="Rama, Sita and Lakshmana" data-series="Temples &amp; Traditions" aria-label="Open Rama, Sita and Lakshmana"><img src="images/temples-traditions/025-sm.jpg" alt="Rama, Sita and Lakshmana" loading="lazy" width="1080" height="1350"></button><figcaption><span>Rama, Sita and Lakshmana</span><span class="frame__no">No. 025</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/w112.jpg" data-title="Stupa and dragons" data-series="Temples &amp; Traditions" aria-label="Open Stupa and dragons"><img src="images/temples-traditions/w112-sm.jpg" alt="Stupa and dragons" loading="lazy" width="1080" height="1350"></button><figcaption><span>Stupa and dragons</span><span class="frame__no">No. W112</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/x217.jpg" data-title="The long wall" data-series="Temples &amp; Traditions" aria-label="Open The long wall"><img src="images/temples-traditions/x217-sm.jpg" alt="The long wall" loading="lazy" width="1080" height="1350"></button><figcaption><span>The long wall</span><span class="frame__no">No. X217</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/w113.jpg" data-title="Temple and sky" data-series="Temples &amp; Traditions" aria-label="Open Temple and sky"><img src="images/temples-traditions/w113-sm.jpg" alt="Temple and sky" loading="lazy" width="1080" height="1350"></button><figcaption><span>Temple and sky</span><span class="frame__no">No. W113</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/temples-traditions/x208.jpg" data-title="Temple front" data-series="Temples &amp; Traditions" aria-label="Open Temple front"><img src="images/temples-traditions/x208-sm.jpg" alt="Temple front" loading="lazy" width="1080" height="1350"></button><figcaption><span>Temple front</span><span class="frame__no">No. X208</span></figcaption></figure>
+  </div>
+</section>
+<section class="series" id="journeys" aria-labelledby="journeys-h">
+  <header class="series__head">
+    <p class="eyebrow">Series 7 of 7</p>
+    <h2 id="journeys-h">Journeys</h2>
+    <p class="series__blurb">Places further from home: Sri Lanka&#x27;s hill country, London, Colombo and Penang.</p>
+  </header>
+  <div class="gallery">
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/055.jpg" data-title="Tea country reservoir" data-series="Journeys" aria-label="Open Tea country reservoir"><img src="images/journeys/055-sm.jpg" alt="Tea country reservoir" loading="lazy" width="1080" height="1350"></button><figcaption><span>Tea country reservoir</span><span class="frame__no">No. 055</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/n110.jpg" data-title="St Paul&#x27;s Cathedral, London" data-series="Journeys" aria-label="Open St Paul&#x27;s Cathedral, London"><img src="images/journeys/n110-sm.jpg" alt="St Paul&#x27;s Cathedral, London" loading="lazy" width="1080" height="1350"></button><figcaption><span>St Paul&#x27;s Cathedral, London</span><span class="frame__no">No. N110</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/md024.jpg" data-title="Sunset glitter, Colombo" data-series="Journeys" aria-label="Open Sunset glitter, Colombo"><img src="images/journeys/md024-sm.jpg" alt="Sunset glitter, Colombo" loading="lazy" width="1080" height="1350"></button><figcaption><span>Sunset glitter, Colombo</span><span class="frame__no">No. MD024</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/w124.jpg" data-title="Reservoir at dusk" data-series="Journeys" aria-label="Open Reservoir at dusk"><img src="images/journeys/w124-sm.jpg" alt="Reservoir at dusk" loading="lazy" width="1080" height="1350"></button><figcaption><span>Reservoir at dusk</span><span class="frame__no">No. W124</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/n118.jpg" data-title="The dome from below, St Paul&#x27;s" data-series="Journeys" aria-label="Open The dome from below, St Paul&#x27;s"><img src="images/journeys/n118-sm.jpg" alt="The dome from below, St Paul&#x27;s" loading="lazy" width="1080" height="1350"></button><figcaption><span>The dome from below, St Paul&#x27;s</span><span class="frame__no">No. N118</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/056.jpg" data-title="Hill temple" data-series="Journeys" aria-label="Open Hill temple"><img src="images/journeys/056-sm.jpg" alt="Hill temple" loading="lazy" width="1080" height="1350"></button><figcaption><span>Hill temple</span><span class="frame__no">No. 056</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/md005.jpg" data-title="Breaking wave" data-series="Journeys" aria-label="Open Breaking wave"><img src="images/journeys/md005-sm.jpg" alt="Breaking wave" loading="lazy" width="1080" height="1350"></button><figcaption><span>Breaking wave</span><span class="frame__no">No. MD005</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/131.jpg" data-title="Penang Hill railway" data-series="Journeys" aria-label="Open Penang Hill railway"><img src="images/journeys/131-sm.jpg" alt="Penang Hill railway" loading="lazy" width="1080" height="1350"></button><figcaption><span>Penang Hill railway</span><span class="frame__no">No. 131</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/w123.jpg" data-title="Hills in the afterglow" data-series="Journeys" aria-label="Open Hills in the afterglow"><img src="images/journeys/w123-sm.jpg" alt="Hills in the afterglow" loading="lazy" width="1080" height="1350"></button><figcaption><span>Hills in the afterglow</span><span class="frame__no">No. W123</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/n124.jpg" data-title="The high altar, St Paul&#x27;s" data-series="Journeys" aria-label="Open The high altar, St Paul&#x27;s"><img src="images/journeys/n124-sm.jpg" alt="The high altar, St Paul&#x27;s" loading="lazy" width="1080" height="1350"></button><figcaption><span>The high altar, St Paul&#x27;s</span><span class="frame__no">No. N124</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/054.jpg" data-title="Reservoir from the hills" data-series="Journeys" aria-label="Open Reservoir from the hills"><img src="images/journeys/054-sm.jpg" alt="Reservoir from the hills" loading="lazy" width="1080" height="1350"></button><figcaption><span>Reservoir from the hills</span><span class="frame__no">No. 054</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/md033.jpg" data-title="Rays and a bird" data-series="Journeys" aria-label="Open Rays and a bird"><img src="images/journeys/md033-sm.jpg" alt="Rays and a bird" loading="lazy" width="1080" height="1350"></button><figcaption><span>Rays and a bird</span><span class="frame__no">No. MD033</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/w125.jpg" data-title="Golden water" data-series="Journeys" aria-label="Open Golden water"><img src="images/journeys/w125-sm.jpg" alt="Golden water" loading="lazy" width="1080" height="1350"></button><figcaption><span>Golden water</span><span class="frame__no">No. W125</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/n119.jpg" data-title="Whispering Gallery ceiling" data-series="Journeys" aria-label="Open Whispering Gallery ceiling"><img src="images/journeys/n119-sm.jpg" alt="Whispering Gallery ceiling" loading="lazy" width="1080" height="1350"></button><figcaption><span>Whispering Gallery ceiling</span><span class="frame__no">No. N119</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/md000.jpg" data-title="Stormy shore" data-series="Journeys" aria-label="Open Stormy shore"><img src="images/journeys/md000-sm.jpg" alt="Stormy shore" loading="lazy" width="1080" height="1350"></button><figcaption><span>Stormy shore</span><span class="frame__no">No. MD000</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/w126.jpg" data-title="Blue hour path" data-series="Journeys" aria-label="Open Blue hour path"><img src="images/journeys/w126-sm.jpg" alt="Blue hour path" loading="lazy" width="1080" height="1350"></button><figcaption><span>Blue hour path</span><span class="frame__no">No. W126</span></figcaption></figure>
+<figure class="frame"><button type="button" class="frame__open" data-full="images/journeys/n127.jpg" data-title="Quire and altar, St Paul&#x27;s" data-series="Journeys" aria-label="Open Quire and altar, St Paul&#x27;s"><img src="images/journeys/n127-sm.jpg" alt="Quire and altar, St Paul&#x27;s" loading="lazy" width="1080" height="1350"></button><figcaption><span>Quire and altar, St Paul&#x27;s</span><span class="frame__no">No. N127</span></figcaption></figure>
+  </div>
+</section>
+  </div>
+
+  <section class="band" id="songs" aria-labelledby="songs-h">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Beyond the lens</p>
+        <h2 id="songs-h">Songs, reels <span class="script">&amp; stories</span></h2>
+        <p>Not everything fits in a still frame. Singing videos, travel clips and new photos go up every week on Instagram, TikTok and Facebook.</p>
+      </div>
+      <div class="links">
+        <a class="link-row" href="https://www.instagram.com/niroshanan/" target="_blank" rel="noopener"><span><strong>Instagram</strong><small>@niroshanan · photos, reels and songs</small></span><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link-row" href="https://www.tiktok.com/@niro7201" target="_blank" rel="noopener"><span><strong>TikTok</strong><small>@niro7201 · short videos and songs</small></span><span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link-row" href="https://www.facebook.com/share/1CNqYfTiqA/" target="_blank" rel="noopener"><span><strong>Facebook</strong><small>The First Sense by Niroshanan</small></span><span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="about" id="about" aria-labelledby="about-h">
+      <img class="about__img" src="images/quiet-places/b1-03.jpg" alt="Bridge and pagoda at dusk in the Chinese Garden" loading="lazy" width="1080" height="1350">
+      <div>
+        <p class="eyebrow">About · Singapore</p>
+        <h2 id="about-h">The First Sense</h2>
+        <p>Sight is the first sense. Before we name a thing or think about it, we see it, and sometimes what we see stops us. The First Sense is my collection of those moments: Supertrees glowing after dark, a dahlia in soft light, a macaque lost in thought, a temple tower painted in every colour.</p>
+        <p>I'm based in Singapore, and photography is my hobby and my way of slowing down. I'm drawn to bold, vibrant colour and to quiet places where the light does the talking. Every photograph here is my own, and new ones join each series every week.</p>
+        <p>When I'm not behind the camera, I sing. You'll find those videos alongside my photos on Instagram, TikTok and Facebook.</p>
+        <blockquote>Not every moment asks to be remembered. Some simply move you, and those are the ones you keep.</blockquote>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <img src="images/eye.png" alt="" width="240" height="79">
+    <span>© 2026 The First Sense by Niroshanan Photography. All photographs are my own; please ask before reusing them.</span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <div class="lightbox__bar"><span class="lb-count" id="lb-count"></span><button type="button" class="lb-btn" id="lb-close" aria-label="Close">✕</button></div>
+  <div class="lightbox__stage">
+    <img id="lb-img" alt="">
+    <button type="button" class="lb-btn lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">←</button>
+    <button type="button" class="lb-btn lb-nav lb-next" id="lb-next" aria-label="Next photo">→</button>
+  </div>
+  <div class="lightbox__cap"><strong id="lb-title"></strong><span id="lb-series"></span></div>
+</div>
+
+<script>
+(function () {
+  var items = Array.prototype.slice.call(document.querySelectorAll('.frame__open'));
+  var lb = document.getElementById('lightbox'), img = document.getElementById('lb-img');
+  var t = document.getElementById('lb-title'), s = document.getElementById('lb-series'), c = document.getElementById('lb-count');
+  var i = 0, last = null;
+  function show(n) {
+    i = (n + items.length) % items.length; var b = items[i];
+    img.src = b.dataset.full; img.alt = b.dataset.title;
+    t.textContent = b.dataset.title; s.textContent = b.dataset.series;
+    c.textContent = (i + 1) + ' / ' + items.length;
+  }
+  function open(n) { last = document.activeElement; show(n); lb.hidden = false; document.body.style.overflow = 'hidden'; document.getElementById('lb-close').focus(); }
+  function close() { lb.hidden = true; document.body.style.overflow = ''; if (last) last.focus(); }
+  items.forEach(function (b, n) { b.addEventListener('click', function () { open(n); }); });
+  document.getElementById('lb-close').onclick = close;
+  document.getElementById('lb-prev').onclick = function () { show(i - 1); };
+  document.getElementById('lb-next').onclick = function () { show(i + 1); };
+  lb.addEventListener('click', function (e) { if (e.target === lb || e.target.classList.contains('lightbox__stage')) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(i - 1); else if (e.key === 'ArrowRight') show(i + 1);
+  });
+  var x0 = null;
+  lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1); x0 = null; });
+  // highlight the current series chip
+  var chips = {}; document.querySelectorAll('.chips a').forEach(function (a) { chips[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) {
+      if (en.isIntersecting) { Object.keys(chips).forEach(function (k) { chips[k].classList.toggle('is-active', k === en.target.id); });
+        var a = chips[en.target.id]; if (a && a.scrollIntoView) a.parentNode.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' }); }
+    }); }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('.series').forEach(function (el) { io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
